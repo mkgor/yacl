@@ -4,6 +4,12 @@
 namespace YACL;
 
 
+use YACL\Entity\CompilationResult;
+use YACL\Tokenizing\Tokenizer;
+use YACL\Tokenizing\TokenizerInterface;
+use YACL\Transliteration\Transliterator;
+use YACL\Transliteration\TransliteratorInterface;
+
 class Manager
 {
     /**
@@ -17,7 +23,7 @@ class Manager
     private $tokenizer;
 
     /**
-     * @var CompilerInterface
+     * @var TransliteratorInterface
      */
     private $compiler;
 
@@ -34,17 +40,18 @@ class Manager
     /**
      * Manager constructor.
      *
-     * @param TokenizerInterface $tokenizer
-     * @param CompilerInterface  $compiler
+     * @param TokenizerInterface      $tokenizer
+     * @param TransliteratorInterface $transliterator
      */
-    public function __construct(TokenizerInterface $tokenizer, CompilerInterface $compiler)
+    public function __construct(TokenizerInterface $tokenizer = null, TransliteratorInterface $transliterator = null)
     {
-        $this->tokenizer = $tokenizer;
-        $this->compiler = $compiler;
+        $this->tokenizer = $tokenizer ?? new Tokenizer();
+        $this->compiler = $transliterator ?? new Transliterator();
     }
 
     /**
      * @return string
+     * @codeCoverageIgnore
      */
     public function getPath(): string
     {
@@ -53,6 +60,7 @@ class Manager
 
     /**
      * @param string $path
+     * @codeCoverageIgnore
      */
     public function setPath(string $path)
     {
@@ -62,7 +70,8 @@ class Manager
     /**
      * @param string $path
      *
-     * @return array|bool
+     * @return CompilationResult
+     * @throws Exceptions\UnknownTokenException
      */
     public function parseYcl(string $path)
     {
@@ -81,7 +90,7 @@ class Manager
                 $cacheFile = include($cacheFilepath);
 
                 if ($this->hash == $cacheFile['hash']) {
-                    $result = $cacheFile['result'];
+                    $result = new CompilationResult(null, $cacheFile['result']);
                 } else {
                     $result = $this->process($content, true);
                 }
@@ -100,21 +109,22 @@ class Manager
      *
      * @param bool   $cache
      *
-     * @return array|bool
+     * @return CompilationResult
+     * @throws Exceptions\UnknownTokenException
      */
     private function process($content, $cache = false)
     {
         $tokensArray = $this->tokenizer->run($content);
 
-        $result = $this->compiler->compile($tokensArray);
+        $result = $this->compiler->compile($tokensArray, $this->tokenizer->getTokensCollection());
 
         if($cache) {
-            if($result->getResult() != false) {
+            if($result->asArray() != false) {
                 $this->generateCacheFile($result->getRaw());
             }
         }
 
-        return $result->getResult();
+        return $result;
     }
 
     /**
@@ -122,7 +132,7 @@ class Manager
      */
     private function cacheEnabled(): bool
     {
-        return (YCL_CACHE == 1);
+        return (defined('YCL_CACHE') && YCL_CACHE == 1);
     }
 
     /**

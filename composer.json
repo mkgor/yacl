@@ -4,10 +4,17 @@
     "authors": [
         {
             "name": "Gor Mkhitaryan",
-            "email": "gor@difocus.ru"
+            "email": "gor.mhitaryan@list.ru"
         }
     ],
-    "require": {},
+    "require": {
+        "php": "^7.2",
+        "symfony/yaml": "^5.0",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
     "autoload": {
         "psr-4": {
             "YACL\\": "src/YACL/"

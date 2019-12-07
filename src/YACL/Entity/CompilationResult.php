@@ -1,6 +1,5 @@
 <?php
 
-
 namespace YACL\Entity;
 
 /**
@@ -23,10 +22,10 @@ class CompilationResult
     /**
      * CompilationResult constructor.
      *
-     * @param string $raw
-     * @param array|bool  $result
+     * @param string     $raw
+     * @param array|bool $result
      */
-    public function __construct(string $raw, $result)
+    public function __construct(?string $raw, $result)
     {
         $this->raw = $raw;
         $this->result = $result;
@@ -41,28 +40,52 @@ class CompilationResult
     }
 
     /**
-     * @param string $raw
+     * @param array|bool $result
      */
-    public function setRaw(string $raw)
+    public function setResult($result)
     {
-        $this->raw = $raw;
+        if(empty($this->result)) {
+            $this->result = $result;
+        }
     }
 
     /**
+     * Returns result as array
+     *
      * @return array|bool
      */
-    public function getResult()
+    public function asArray()
     {
         return $this->result;
     }
 
     /**
-     * @param array|bool $result
+     * Returns result as PHP object
+     *
+     * @return object|bool
      */
-    public function setResult($result)
+    public function asObject()
     {
-        $this->result = $result;
+        return (is_array($this->result)) ? $this->convertArrayToObject($this->result) : $this->result;
     }
 
+    /**
+     * Recursively converts array to object
+     *
+     * @param array $array
+     *
+     * @return object
+     */
+    private function convertArrayToObject(array $array)
+    {
+        foreach($array as $key => $value)
+        {
+            if(is_array($value))
+            {
+                $array[$key] = $this->convertArrayToObject($value);
+            }
+        }
 
+        return (object) $array;
+    }
 }

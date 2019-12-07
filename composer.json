@@ -1,0 +1,16 @@
+{
+    "name": "pixaye/yacl",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Gor Mkhitaryan",
+            "email": "gor@difocus.ru"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "YACL\\": "src/YACL/"
+        }
+    }
+}

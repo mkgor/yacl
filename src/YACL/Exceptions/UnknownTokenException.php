@@ -10,6 +10,7 @@ use Throwable;
  * Class UnknownTokenException
  *
  * @package YACL\Exceptions
+ * @codeCoverageIgnore
  */
 class UnknownTokenException extends \Exception
 {

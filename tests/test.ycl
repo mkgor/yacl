@@ -1,0 +1,28 @@
+dbconfig are
+    dbhost is "localhost"
+
+    dbconfigchild are
+        dbhost are 3, 3, "43w" end
+        dbuser is "root2"
+    end
+
+    dbconfigchild2 are
+        dbhost is "local2host"
+        dbuser is "root2"
+    end
+end
+
+dbconfig2 are
+    dbhost is "localhost"
+    dbuser is "root"
+
+    dbconfigchild are
+        dbhost is "local2host"
+        dbuser is "root2"
+    end
+
+    dbconfigchild2 are
+        dbhost are 1,"local2host" end
+        dbuser is "root2"
+    end
+end

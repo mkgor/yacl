@@ -28,7 +28,8 @@ class CompilationResult
     public function __construct(?string $raw, $result)
     {
         $this->raw = $raw;
-        $this->result = $result;
+
+        $this->setResult($result);
     }
 
     /**

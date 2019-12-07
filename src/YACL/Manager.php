@@ -162,6 +162,7 @@ CACHEFILE
 
     /**
      * @return mixed
+     * @codeCoverageIgnore
      */
     private function getFilename()
     {

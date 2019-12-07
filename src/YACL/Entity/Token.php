@@ -36,9 +36,9 @@ class Token
      */
     public function __construct(string $tokenName, callable $tokenRecognitionCallback, callable $tokenCompilingCallback)
     {
-        $this->tokenName = $tokenName;
-        $this->tokenRecognitionCallback = $tokenRecognitionCallback;
-        $this->tokenCompilingCallback = $tokenCompilingCallback;
+        $this->setTokenName($tokenName);
+        $this->setTokenRecognitionCallback($tokenRecognitionCallback);
+        $this->setTokenCompilingCallback($tokenCompilingCallback);
     }
 
     /**

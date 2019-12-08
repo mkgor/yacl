@@ -7,8 +7,6 @@ namespace YACL\Entity;
  *
  * @package YACL\Entity
  *
- * @method tokenRecognitionCallback(array $args)
- * @method tokenCompilingCallback(array $args)
  */
 class Token
 {

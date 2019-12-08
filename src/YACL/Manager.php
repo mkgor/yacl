@@ -1,8 +1,6 @@
 <?php
 
-
 namespace YACL;
-
 
 use YACL\Entity\TransliterationResult;
 use YACL\Tokenizing\Tokenizer;
@@ -10,6 +8,10 @@ use YACL\Tokenizing\TokenizerInterface;
 use YACL\Transliteration\Transliterator;
 use YACL\Transliteration\TransliteratorInterface;
 
+/**
+ * Class Manager
+ * @package YACL
+ */
 class Manager
 {
     /**

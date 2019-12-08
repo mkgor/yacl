@@ -5,6 +5,10 @@ namespace YACL\Transliteration;
 use YACL\Entity\TransliterationResult;
 use YACL\Tokenizing\TokenCollection;
 
+/**
+ * Interface TransliteratorInterface
+ * @package YACL\Transliteration
+ */
 interface TransliteratorInterface
 {
     /**

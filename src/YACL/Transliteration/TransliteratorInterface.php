@@ -2,7 +2,7 @@
 
 namespace YACL\Transliteration;
 
-use YACL\Entity\CompilationResult;
+use YACL\Entity\TransliterationResult;
 use YACL\Tokenizing\TokenCollection;
 
 interface TransliteratorInterface
@@ -11,7 +11,7 @@ interface TransliteratorInterface
      * @param array           $input
      * @param TokenCollection $tokenCollection
      *
-     * @return CompilationResult
+     * @return TransliterationResult
      */
-    public function compile(array $input, TokenCollection $tokenCollection): CompilationResult;
+    public function transliterate(array $input, TokenCollection $tokenCollection): TransliterationResult;
 }

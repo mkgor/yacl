@@ -2,7 +2,7 @@
 
 namespace YACL\Transliteration;
 
-use YACL\Entity\CompilationResult;
+use YACL\Entity\TransliterationResult;
 use YACL\Exceptions\UnknownTokenException;
 use YACL\Tokenizing\TokenCollection;
 
@@ -21,22 +21,22 @@ class Transliterator implements TransliteratorInterface
     /**
      * Builds PHP array from array of tokens, which we get from tokenizer
      *
-     * @param array           $tokensArray
+     * @param array           $input
      *
      * @param TokenCollection $tokenCollection
      *
      * @return mixed
      * @throws UnknownTokenException
      */
-    public function compile(array $tokensArray, TokenCollection $tokenCollection): CompilationResult
+    public function transliterate(array $input, TokenCollection $tokenCollection): TransliterationResult
     {
         $this->code = "[";
 
-        for($i = 0, $count = count($tokensArray); $i < $count; $i++) {
-            if($token = $tokenCollection->find($tokensArray[$i]['type'])) {
-                $this->code .= $token->getTokenCompilingCallbackResult($tokensArray[$i]['content']);
+        for($i = 0, $count = count($input); $i < $count; $i++) {
+            if($token = $tokenCollection->find($input[$i]['type'])) {
+                $this->code .= $token->getTokenCompilingCallbackResult($input[$i]['content']);
             } else {
-                throw new UnknownTokenException($tokensArray[$i]['type']);
+                throw new UnknownTokenException($input[$i]['type']);
             }
         }
 
@@ -48,6 +48,6 @@ class Transliterator implements TransliteratorInterface
             $result = false;
         }
 
-        return new CompilationResult($this->code, $result);
+        return new TransliterationResult($this->code, $result);
     }
 }

@@ -4,7 +4,7 @@
 namespace YACL;
 
 
-use YACL\Entity\CompilationResult;
+use YACL\Entity\TransliterationResult;
 use YACL\Tokenizing\Tokenizer;
 use YACL\Tokenizing\TokenizerInterface;
 use YACL\Transliteration\Transliterator;
@@ -25,7 +25,7 @@ class Manager
     /**
      * @var TransliteratorInterface
      */
-    private $compiler;
+    private $transliterator;
 
     /**
      * @var string
@@ -46,7 +46,7 @@ class Manager
     public function __construct(TokenizerInterface $tokenizer = null, TransliteratorInterface $transliterator = null)
     {
         $this->tokenizer = $tokenizer ?? new Tokenizer();
-        $this->compiler = $transliterator ?? new Transliterator();
+        $this->transliterator = $transliterator ?? new Transliterator();
     }
 
     /**
@@ -70,7 +70,7 @@ class Manager
     /**
      * @param string $path
      *
-     * @return CompilationResult
+     * @return TransliterationResult
      * @throws Exceptions\UnknownTokenException
      */
     public function parseYcl(string $path)
@@ -90,7 +90,7 @@ class Manager
                 $cacheFile = include($cacheFilepath);
 
                 if ($this->hash == $cacheFile['hash']) {
-                    $result = new CompilationResult(null, $cacheFile['result']);
+                    $result = new TransliterationResult(null, $cacheFile['result']);
                 } else {
                     $result = $this->process($content, true);
                 }
@@ -109,14 +109,14 @@ class Manager
      *
      * @param bool   $cache
      *
-     * @return CompilationResult
+     * @return TransliterationResult
      * @throws Exceptions\UnknownTokenException
      */
     private function process($content, $cache = false)
     {
         $tokensArray = $this->tokenizer->run($content);
 
-        $result = $this->compiler->compile($tokensArray, $this->tokenizer->getTokensCollection());
+        $result = $this->transliterator->transliterate($tokensArray, $this->tokenizer->getTokensCollection());
 
         if($cache) {
             if($result->asArray() != false) {

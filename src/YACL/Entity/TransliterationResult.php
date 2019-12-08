@@ -3,11 +3,11 @@
 namespace YACL\Entity;
 
 /**
- * Class CompilationResult
+ * Class TransliterationResult
  *
  * @package YACL\Entity
  */
-class CompilationResult
+class TransliterationResult
 {
     /**
      * @var string
@@ -20,7 +20,7 @@ class CompilationResult
     private $result;
 
     /**
-     * CompilationResult constructor.
+     * TransliterationResult constructor.
      *
      * @param string     $raw
      * @param array|bool $result

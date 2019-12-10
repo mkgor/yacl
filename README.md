@@ -1,3 +1,4 @@
+![](https://img.shields.io/badge/coverage-94%25-green)
 # YACL
 ##### Yet Another Configuration Language
 

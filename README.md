@@ -1,4 +1,8 @@
 ![](https://img.shields.io/badge/coverage-94%25-green)
+![GitHub](https://img.shields.io/github/license/pixaye/yacl)
+![GitHub All Releases](https://img.shields.io/github/downloads/pixaye/yacl/total)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/pixaye/yacl)
+
 # YACL
 ##### Yet Another Configuration Language
 

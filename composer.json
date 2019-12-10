@@ -1,6 +1,7 @@
 {
     "name": "pixaye/yacl",
     "type": "project",
+    "license": "MIT",
     "authors": [
         {
             "name": "Gor Mkhitaryan",

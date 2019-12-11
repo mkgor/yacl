@@ -1,6 +1,7 @@
 {
     "name": "pixaye/yacl",
     "type": "project",
+    "license": "MIT",
     "authors": [
         {
             "name": "Gor Mkhitaryan",
@@ -8,9 +9,7 @@
         }
     ],
     "require": {
-        "php": "^7.2",
-        "symfony/yaml": "^5.0",
-        "ext-json": "*"
+        "php": "^7.2"
     },
     "require-dev": {
         "phpunit/phpunit": "*"

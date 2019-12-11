@@ -58,6 +58,6 @@ You also can create inline array and specify its items in one line
 inlineArray are "firstValue","secondValue","thirdValue" end
 ````
 
-#### Important
+#### Syntax highlighting
 
-You can't use integer as value, you should specify it as string
+In near future i will create .ycl syntax highlighting plugin for Sublime Text

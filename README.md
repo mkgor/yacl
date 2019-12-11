@@ -8,6 +8,11 @@
 
 YACL is lightweight and easy to use library, which allows you to make your configuration files easy to read and edit. 
 
+## Requirements
+
+- Composer (for installation)
+- PHP 7.1 or higher
+
 ## Installation
 
 Use composer to install it

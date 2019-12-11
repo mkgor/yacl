@@ -19,6 +19,7 @@ class Tokenizer implements TokenizerInterface
     const EQUALITY_TOKEN_NAME = 'equality';
     const STRING_TOKEN_NAME = "string";
     const DATA_ARRAY_TOKEN_NAME = "data_array";
+    const INTEGER_TOKEN_NAME = "int";
 
     const ARRAY_START_TOKEN_SIGNATURE = 'are';
     const ARRAY_END_TOKEN_SIGNATURE = 'end';
@@ -66,6 +67,18 @@ class Tokenizer implements TokenizerInterface
     private function initializeCoreTokens()
     {
         $coreTokens = [
+            new Token(Tokenizer::INTEGER_TOKEN_NAME,
+                function($token) {
+                    return (is_numeric($token)) ? [
+                        'type' => Tokenizer::INTEGER_TOKEN_NAME,
+                        'content' => (int)$token
+                    ] : false;
+                },
+
+                function($content) {
+                    return sprintf("%s,", $content);
+                }),
+
             new Token(Tokenizer::ARRAY_START_TOKEN_NAME,
                 function ($token) {
                     return ($token == Tokenizer::ARRAY_START_TOKEN_SIGNATURE) ? [

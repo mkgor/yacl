@@ -7,7 +7,7 @@ dbconfig are
     end
 
     dbconfigchild2 are
-        dbhost is "local2host"
+        dbhost is 3
         dbuser is "root2"
     end
 end
